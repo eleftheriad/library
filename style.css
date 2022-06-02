@@ -24,8 +24,8 @@ main{
 .library{
     display: grid;
     grid-template-columns: 100px 100px 100px;
-    grid-template-rows: 200px;
-    gap: 300px;
+    grid-template-rows: 100px 100px 100px;
+    gap: 150px 300px;
 }
 .book{
     padding: 0 100px;

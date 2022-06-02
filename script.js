@@ -1,5 +1,5 @@
 let myLibrary = [
-    {
+/*    {
         "title": "purple",
         "author": "minivan",
         "pages": 7
@@ -8,19 +8,24 @@ let myLibrary = [
         "title": "john",
         "author": "oliver",
         "pages": 72
-    }
+    }*/
 ];
 
-function Book() {
+function Book(title, author, pages) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
   // the constructor...
 }
 
-function addBookToLibrary() {
-  // do stuff here
+function addBookToLibrary(book) {
+    // do stuff here
+    myLibrary.push(book);
 }
+const library = document.querySelector(".library")
 
 function displayLibrary(){
-    const library = document.querySelector(".library")
+    clear_books();
     for (let i = 0; i < myLibrary.length; i++) {
         const element = document.createElement('div');
         element.classList.add("book");
@@ -43,4 +48,19 @@ function displayLibrary(){
         
     }
 }
-displayLibrary()
+button = document.querySelector("#submit-btn");
+button.addEventListener("click",() => { 
+    const title = document.querySelector("#bookTitle").value;
+    const author = document.querySelector("#bookAuthor").value;
+    const pages = document.querySelector("#pages").value;
+
+    const book1 = new Book(title, author, pages)
+    addBookToLibrary(book1)
+    displayLibrary()
+});
+const clear_books = function(){
+    const books = document.querySelectorAll(".book");
+    books.forEach(book => {
+        book.remove();
+    });
+};
