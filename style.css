@@ -43,8 +43,15 @@ main{
 label, input{
     display: block;
 }
+
 #submit-btn{
     margin-top: 10px;
     padding: 10px 20;
     cursor: pointer;
 }
+.read-button{
+    margin-top: 10px;
+    align-self: center;
+
+}
+

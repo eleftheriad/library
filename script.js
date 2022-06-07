@@ -11,10 +11,11 @@ let myLibrary = [
     }*/
 ];
 
-function Book(title, author, pages) {
+function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
+    this.read = read;
   // the constructor...
 }
 
@@ -39,12 +40,27 @@ function displayLibrary(){
         const pages= document.createElement('div');
         pages.classList.add("pages");
         pages.textContent = myLibrary[i].pages;
+        const btn = document.createElement('button');
+        btn.classList.add("read-button");
+        btn.textContent = myLibrary[i].read;
+        
+        const att = document.createAttribute("data-id");
+
+        // Set the value of the class attribute
+        att.value = i;
+
+        // Add the class attribute to the first h1;
+        element.setAttributeNode(att);
 
         element.appendChild(title);
         element.appendChild(author);
         element.appendChild(pages);
+        element.appendChild(btn);
 
         library.appendChild(element)
+
+
+        
         
     }
 }
@@ -53,14 +69,24 @@ button.addEventListener("click",() => {
     const title = document.querySelector("#bookTitle").value;
     const author = document.querySelector("#bookAuthor").value;
     const pages = document.querySelector("#pages").value;
+    const read = document.querySelector("#is_read");
 
-    const book1 = new Book(title, author, pages)
-    addBookToLibrary(book1)
-    displayLibrary()
+    const book1 = new Book(title, author, pages, read.checked);
+    addBookToLibrary(book1);
+    displayLibrary();
 });
+
 const clear_books = function(){
     const books = document.querySelectorAll(".book");
     books.forEach(book => {
         book.remove();
     });
 };
+const read_button = document.querySelectorAll(".read-button");
+read_button.forEach((read_btn) => {
+    read_btn.addEventListener('click', () => {  
+        if(read_btn.textContent == "Read")
+            read_btn.textContent = "Not Read";
+        else read_btn.textContent = "Read";
+    });
+});
