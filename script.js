@@ -41,9 +41,23 @@ function displayLibrary(){
         pages.classList.add("pages");
         pages.textContent = myLibrary[i].pages;
         const btn = document.createElement('button');
+        
         btn.classList.add("read-button");
         btn.textContent = myLibrary[i].read;
-        
+        if(btn.textContent == "Read"){
+            btn.style.backgroundColor = 'green';
+        }else{
+            btn.style.backgroundColor = 'red';
+        }
+        btn.addEventListener('click', () => {  
+            if(btn.textContent == "Read"){
+                btn.textContent = "Not Read";
+                btn.style.backgroundColor = 'Red';
+            }else{
+                btn.textContent = "Read";
+                btn.style.backgroundColor = 'green';
+            }
+        });
         const att = document.createAttribute("data-id");
 
         // Set the value of the class attribute
@@ -70,8 +84,11 @@ button.addEventListener("click",() => {
     const author = document.querySelector("#bookAuthor").value;
     const pages = document.querySelector("#pages").value;
     const read = document.querySelector("#is_read");
-
-    const book1 = new Book(title, author, pages, read.checked);
+    let readValue;
+    if (read.checked == true) {
+        readValue = "Read";
+    }else readValue = "Not Read";
+    const book1 = new Book(title, author, pages, readValue);
     addBookToLibrary(book1);
     displayLibrary();
 });
@@ -82,11 +99,3 @@ const clear_books = function(){
         book.remove();
     });
 };
-const read_button = document.querySelectorAll(".read-button");
-read_button.forEach((read_btn) => {
-    read_btn.addEventListener('click', () => {  
-        if(read_btn.textContent == "Read")
-            read_btn.textContent = "Not Read";
-        else read_btn.textContent = "Read";
-    });
-});
